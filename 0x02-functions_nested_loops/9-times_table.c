@@ -25,7 +25,7 @@ _putchar(c + 48);
 else
 {
 _putchar((c / 10) + 48);
-_putchar((c % 10 + 48);
+_putchar((c % 10) + 48);
 }
 }
 _putchar('\n');
