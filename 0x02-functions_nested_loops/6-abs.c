@@ -1,6 +1,6 @@
 #include "holberton.h"
 /**
- * abs- gives the absolute value of an integer.
+ * _abs - gives the absolute value of an integer.
  *
  * @n: inputs number as an integer.
  *
