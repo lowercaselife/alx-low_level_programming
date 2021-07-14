@@ -1,44 +1,57 @@
-#include "holberton.h"
 #include <stdlib.h>
+#include <stdio.h>
+int _strLen(char *);
 /**
- * argstostr - prints args
- * @ac: takes in width of grid
- * @av: height of grid
- * Return: the args one line at a time
+ * argstostr - takes all args and concatenates them into str
+ *
+ * @ac: arg count, num of args in av
+ * @av: array of pointers to words (args)
+ *
+ * Return: pointer to beginning of new string
  */
-
 char *argstostr(int ac, char **av)
 {
-	char *str;
-	int count = 0, a = 0, b = 0, c = 0;
+	int i = 0, n = 0, totalSize = 0;
+	char *newStr, *startNewStr;
 
-	if (ac == 0 || av == NULL)
+	if (ac <= 0 || av == NULL)
 		return (NULL);
-	while (a < ac)
+
+	while (i < ac)
 	{
-		b = 0;
-		while (av[a][b] != '\0')
-		{
-			count++;
-			b++;
-		}
-		a++;
+		totalSize += _strLen(av[i]) + 1; /* need space for additional new line */
+		i++;
 	}
-	count = count + ac + 1;
-	str = malloc(sizeof(char) * count);
-	if (str == NULL)
-	{
+	newStr = malloc(sizeof(char) * totalSize + 1); /* plus null byte */
+	if (newStr == NULL) /* ran out of memory */
 		return (NULL);
-	}
-	for (a = 0; a < ac; a++)
+	startNewStr = newStr;
+
+	i = 0;
+	while (i < ac)
 	{
-		for (b = 0; av[a][b] != '\0'; b++)
+		for (n = 0; av[i][n]; n++)
 		{
-			str[c] = av[a][b];
-			c++;
+			*newStr++ = av[i][n];
 		}
-		str[c] = '\n';
-		c++;
+		*newStr++ = '\n';
+		i++;
 	}
-	return (str);
+	*newStr = '\0';
+	return (startNewStr);
+}
+/**
+ * _strLen - returns length of string
+ *
+ * @s: string to check
+ *
+ * Return: integer, length of string
+ */
+int _strLen(char *s)
+{
+	int strL = 0;
+
+	while (*(s + strL))
+		strL++;
+	return (strL);
 }
